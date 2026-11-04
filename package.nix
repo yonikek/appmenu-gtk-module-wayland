@@ -48,6 +48,14 @@ stdenv.mkDerivation {
     glib-compile-schemas --strict "$out/share/glib-2.0/schemas"
   '';
 
+  # Upstream otherwise tries to install into the systemd dependency.
+  postPatch = ''
+    substituteInPlace CMakeLists.txt \
+      --replace-fail \
+        'pkg_get_variable(SYSTEMD_USER_UNIT_DIR systemd systemduserunitdir)' \
+        'set(SYSTEMD_USER_UNIT_DIR "''${CMAKE_INSTALL_LIBDIR}/systemd/user")'
+  '';
+
   meta = {
     description = "GTK 3 global-menu module for Plasma Wayland";
     homepage = "https://github.com/yonikek/appmenu-gtk-module-wayland";
