@@ -44,6 +44,7 @@
         in
         {
           environment.systemPackages = [ package ];
+          systemd.packages = [ package ];
           environment.etc."profile.d/appmenu-gtk-module-wayland.sh".source =
             "${package}/etc/profile.d/appmenu-gtk-module-wayland.sh";
         };

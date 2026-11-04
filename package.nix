@@ -4,6 +4,8 @@
   cmake,
   pkg-config,
   glib,
+  systemd,
+  dbus,
   gtk3,
   libdbusmenu-gtk3,
   libx11,
@@ -21,6 +23,8 @@ stdenv.mkDerivation {
     cmake
     pkg-config
     glib # provides glib-compile-schemas, which CMake runs at install time
+    systemd
+    dbus
   ];
 
   buildInputs = [
